@@ -1,0 +1,658 @@
+-- This CLP file was created using DB2LOOK Version "9.7" 
+-- Timestamp: 4/10/2013 2:36:44 PM
+-- Database Name: VLE            
+-- Database Manager Version: DB2/NT Version 9.7.2          
+-- Database Codepage: 1252
+-- Database Collating Sequence is: UNIQUE
+
+
+CONNECT TO VLE;
+
+
+
+-- Mimic tablespace
+
+ALTER TABLESPACE SYSCATSPACE
+      PREFETCHSIZE AUTOMATIC
+      OVERHEAD 7.500000
+      NO FILE SYSTEM CACHING 
+      AUTORESIZE YES 
+      TRANSFERRATE 0.060000;
+
+
+ALTER TABLESPACE TEMPSPACE1
+      PREFETCHSIZE AUTOMATIC
+      OVERHEAD 7.500000
+      FILE SYSTEM CACHING 
+      TRANSFERRATE 0.060000;
+
+
+ALTER TABLESPACE USERSPACE1
+      PREFETCHSIZE AUTOMATIC
+      OVERHEAD 7.500000
+      NO FILE SYSTEM CACHING 
+      AUTORESIZE YES 
+      TRANSFERRATE 0.060000;
+
+
+------------------------------------------------
+-- DDL Statements for table "DB2ADMIN"."ROLE"
+------------------------------------------------
+ 
+
+CREATE TABLE "DB2ADMIN"."ROLE"  (
+		  "R_ID" BIGINT NOT NULL , 
+		  "R_NAME" VARCHAR(20) NOT NULL )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "DB2ADMIN"."ROLE"
+
+ALTER TABLE "DB2ADMIN"."ROLE" 
+	ADD CONSTRAINT "CC1362992568891" PRIMARY KEY
+		("R_ID");
+
+
+
+------------------------------------------------
+-- DDL Statements for table "DB2ADMIN"."FACULTY"
+------------------------------------------------
+ 
+
+CREATE TABLE "DB2ADMIN"."FACULTY"  (
+		  "F_ID" BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1234  
+		    INCREMENT BY +1  
+		    MINVALUE +1234  
+		    MAXVALUE +9223372036854775807  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "F_NAME" VARCHAR(30) NOT NULL , 
+		  "ROLE_ID" BIGINT NOT NULL WITH DEFAULT 2 , 
+		  "EMAIL_ID" VARCHAR(20) NOT NULL , 
+		  "PWD" VARCHAR(10) NOT NULL , 
+		  "MOBILE_NO" BIGINT NOT NULL , 
+		  "EXPRNCE" INTEGER NOT NULL , 
+		  "INTRST_COURSE" VARCHAR(50) NOT NULL )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "DB2ADMIN"."FACULTY"
+
+ALTER TABLE "DB2ADMIN"."FACULTY" 
+	ADD CONSTRAINT "CC1362993324846" PRIMARY KEY
+		("F_ID");
+
+
+-- DDL Statements for unique constraints on Table "DB2ADMIN"."FACULTY"
+
+
+ALTER TABLE "DB2ADMIN"."FACULTY" 
+	ADD CONSTRAINT "CC1364454494513" UNIQUE
+		("EMAIL_ID");
+
+
+ALTER TABLE "DB2ADMIN"."FACULTY" ALTER COLUMN "F_ID" RESTART WITH 1239;
+
+------------------------------------------------
+-- DDL Statements for table "DB2ADMIN"."QUERY"
+------------------------------------------------
+ 
+
+CREATE TABLE "DB2ADMIN"."QUERY"  (
+		  "Q_ID" BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +9223372036854775807  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "QUERY" VARCHAR(1000) NOT NULL , 
+		  "A_BY" BIGINT NOT NULL , 
+		  "A_TO" BIGINT NOT NULL , 
+		  "ISACTIVE" INTEGER )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "DB2ADMIN"."QUERY"
+
+ALTER TABLE "DB2ADMIN"."QUERY" 
+	ADD CONSTRAINT "CC1362994117937" PRIMARY KEY
+		("Q_ID");
+
+
+
+ALTER TABLE "DB2ADMIN"."QUERY" ALTER COLUMN "Q_ID" RESTART WITH 5;
+
+------------------------------------------------
+-- DDL Statements for table "DB2ADMIN"."RESPONSE"
+------------------------------------------------
+ 
+
+CREATE TABLE "DB2ADMIN"."RESPONSE"  (
+		  "RES_ID" BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +9223372036854775807  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "QUERY_ID" BIGINT NOT NULL , 
+		  "ANSWER" VARCHAR(1000) NOT NULL , 
+		  "RES_BY" BIGINT NOT NULL , 
+		  "RES_TO" BIGINT NOT NULL )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "DB2ADMIN"."RESPONSE"
+
+ALTER TABLE "DB2ADMIN"."RESPONSE" 
+	ADD CONSTRAINT "CC1363012018372" PRIMARY KEY
+		("RES_ID");
+
+
+
+ALTER TABLE "DB2ADMIN"."RESPONSE" ALTER COLUMN "RES_ID" RESTART WITH 4;
+
+------------------------------------------------
+-- DDL Statements for table "DB2ADMIN"."FINAL_ANS"
+------------------------------------------------
+ 
+
+CREATE TABLE "DB2ADMIN"."FINAL_ANS"  (
+		  "ANS_ID" BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +9223372036854775807  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "TEST_ID" BIGINT NOT NULL , 
+		  "ANSPAPER" BLOB(1048576) LOGGED NOT COMPACT NOT NULL , 
+		  "ANS_BY" BIGINT NOT NULL , 
+		  "ISACTIVE" VARCHAR(10) NOT NULL WITH DEFAULT 0 , 
+		  "ANS_TO" BIGINT )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "DB2ADMIN"."FINAL_ANS"
+
+ALTER TABLE "DB2ADMIN"."FINAL_ANS" 
+	ADD CONSTRAINT "CC1363012312577" PRIMARY KEY
+		("ANS_ID");
+
+
+
+ALTER TABLE "DB2ADMIN"."FINAL_ANS" ALTER COLUMN "ANS_ID" RESTART WITH 3;
+
+------------------------------------------------
+-- DDL Statements for table "DB2ADMIN"."STUDENT"
+------------------------------------------------
+ 
+
+CREATE TABLE "DB2ADMIN"."STUDENT"  (
+		  "S_ID" BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +9223372036854775807  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "FNAME" VARCHAR(30) NOT NULL , 
+		  "LNAME" VARCHAR(30) NOT NULL , 
+		  "EMAIL_ID" VARCHAR(25) NOT NULL , 
+		  "PWD" VARCHAR(10) NOT NULL , 
+		  "MOBILE_NO" BIGINT NOT NULL , 
+		  "ADDRESS" VARCHAR(100) NOT NULL , 
+		  "QUALIFICATION" VARCHAR(30) NOT NULL , 
+		  "ISACTIVE" VARCHAR(10) NOT NULL WITH DEFAULT 'pending' )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "DB2ADMIN"."STUDENT"
+
+ALTER TABLE "DB2ADMIN"."STUDENT" 
+	ADD CONSTRAINT "CC1363269957208" PRIMARY KEY
+		("S_ID");
+
+
+-- DDL Statements for unique constraints on Table "DB2ADMIN"."STUDENT"
+
+
+ALTER TABLE "DB2ADMIN"."STUDENT" 
+	ADD CONSTRAINT "CC1364454523466" UNIQUE
+		("EMAIL_ID");
+
+
+ALTER TABLE "DB2ADMIN"."STUDENT" ALTER COLUMN "S_ID" RESTART WITH 11;
+
+------------------------------------------------
+-- DDL Statements for table "DB2ADMIN"."COURSE"
+------------------------------------------------
+ 
+
+CREATE TABLE "DB2ADMIN"."COURSE"  (
+		  "C_ID" BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +9223372036854775807  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "C_NAME" VARCHAR(50) NOT NULL , 
+		  "CONTENT" BLOB(1048576) LOGGED NOT COMPACT NOT NULL , 
+		  "FEE" DOUBLE NOT NULL , 
+		  "DURATION" VARCHAR(10) NOT NULL , 
+		  "COURSEDATE" DATE )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "DB2ADMIN"."COURSE"
+
+ALTER TABLE "DB2ADMIN"."COURSE" 
+	ADD CONSTRAINT "CC1362993472460" PRIMARY KEY
+		("C_ID");
+
+
+
+ALTER TABLE "DB2ADMIN"."COURSE" ALTER COLUMN "C_ID" RESTART WITH 5;
+
+------------------------------------------------
+-- DDL Statements for table "DB2ADMIN"."BATCH"
+------------------------------------------------
+ 
+
+CREATE TABLE "DB2ADMIN"."BATCH"  (
+		  "B_ID" BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +9223372036854775807  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "B_NAME" VARCHAR(20) NOT NULL , 
+		  "COURSE_ID" BIGINT NOT NULL , 
+		  "SDATE" DATE , 
+		  "CDATE" DATE NOT NULL , 
+		  "FAC_ID" BIGINT NOT NULL , 
+		  "ISACTIVE" VARCHAR(10) NOT NULL )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "DB2ADMIN"."BATCH"
+
+ALTER TABLE "DB2ADMIN"."BATCH" 
+	ADD CONSTRAINT "CC1363958970302" PRIMARY KEY
+		("B_ID");
+
+
+
+ALTER TABLE "DB2ADMIN"."BATCH" ALTER COLUMN "B_ID" RESTART WITH 10;
+
+------------------------------------------------
+-- DDL Statements for table "DB2ADMIN"."STUDENT_COURSE"
+------------------------------------------------
+ 
+
+CREATE TABLE "DB2ADMIN"."STUDENT_COURSE"  (
+		  "STUDENTCOURSE_ID" BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +9223372036854775807  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "S_ID" BIGINT NOT NULL , 
+		  "B_ID" BIGINT NOT NULL , 
+		  "ISACTIVE" INTEGER NOT NULL WITH DEFAULT 0 )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "DB2ADMIN"."STUDENT_COURSE"
+
+ALTER TABLE "DB2ADMIN"."STUDENT_COURSE" 
+	ADD CONSTRAINT "CC1362993800448" PRIMARY KEY
+		("STUDENTCOURSE_ID");
+
+
+
+ALTER TABLE "DB2ADMIN"."STUDENT_COURSE" ALTER COLUMN "STUDENTCOURSE_ID" RESTART WITH 7;
+
+------------------------------------------------
+-- DDL Statements for table "DB2ADMIN"."ASSESSMENT"
+------------------------------------------------
+ 
+
+CREATE TABLE "DB2ADMIN"."ASSESSMENT"  (
+		  "A_ID" BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +9223372036854775807  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "C_ID" BIGINT , 
+		  "PAPER" BLOB(31457280) LOGGED NOT COMPACT , 
+		  "CREATED_BY" BIGINT )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "DB2ADMIN"."ASSESSMENT"
+
+ALTER TABLE "DB2ADMIN"."ASSESSMENT" 
+	ADD CONSTRAINT "CC1362993971451" PRIMARY KEY
+		("A_ID");
+
+
+
+ALTER TABLE "DB2ADMIN"."ASSESSMENT" ALTER COLUMN "A_ID" RESTART WITH 3;
+
+------------------------------------------------
+-- DDL Statements for table "DB2ADMIN"."TUTORIALS"
+------------------------------------------------
+ 
+
+CREATE TABLE "DB2ADMIN"."TUTORIALS"  (
+		  "TUT_ID" BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +9223372036854775807  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "BATCH_ID" BIGINT NOT NULL , 
+		  "FILES" BLOB(2147483647) NOT LOGGED COMPACT , 
+		  "DATE" DATE NOT NULL , 
+		  "ANS_BY" BIGINT , 
+		  "HEADING" VARCHAR(20) , 
+		  "TYPE" VARCHAR(10) )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "DB2ADMIN"."TUTORIALS"
+
+ALTER TABLE "DB2ADMIN"."TUTORIALS" 
+	ADD CONSTRAINT "CC1363012474139" PRIMARY KEY
+		("TUT_ID");
+
+
+
+ALTER TABLE "DB2ADMIN"."TUTORIALS" ALTER COLUMN "TUT_ID" RESTART WITH 11;
+
+------------------------------------------------
+-- DDL Statements for table "DB2ADMIN"."FINAL_TEST"
+------------------------------------------------
+ 
+
+CREATE TABLE "DB2ADMIN"."FINAL_TEST"  (
+		  "TEST_ID" BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +9223372036854775807  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "BATCH_ID" BIGINT NOT NULL , 
+		  "PAPER" BLOB(1048576) LOGGED NOT COMPACT NOT NULL , 
+		  "ISACTIVE" VARCHAR(10) NOT NULL WITH DEFAULT 0 , 
+		  "CREATED_BY" BIGINT )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "DB2ADMIN"."FINAL_TEST"
+
+ALTER TABLE "DB2ADMIN"."FINAL_TEST" 
+	ADD CONSTRAINT "CC1363012132909" PRIMARY KEY
+		("TEST_ID");
+
+
+-- DDL Statements for unique constraints on Table "DB2ADMIN"."FINAL_TEST"
+
+
+ALTER TABLE "DB2ADMIN"."FINAL_TEST" 
+	ADD CONSTRAINT "CC1365357303687" UNIQUE
+		("BATCH_ID");
+
+
+ALTER TABLE "DB2ADMIN"."FINAL_TEST" ALTER COLUMN "TEST_ID" RESTART WITH 7;
+
+------------------------------------------------
+-- DDL Statements for table "DB2ADMIN"."EXAM"
+------------------------------------------------
+ 
+
+CREATE TABLE "DB2ADMIN"."EXAM"  (
+		  "E_ID" BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +9223372036854775807  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "S_ID" BIGINT NOT NULL , 
+		  "B_ID" BIGINT NOT NULL , 
+		  "HALL_TICKET" BLOB(1048576) NOT LOGGED COMPACT NOT NULL , 
+		  "DATE" DATE NOT NULL )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "DB2ADMIN"."EXAM"
+
+ALTER TABLE "DB2ADMIN"."EXAM" 
+	ADD CONSTRAINT "CC1365354713118" PRIMARY KEY
+		("E_ID");
+
+
+
+ALTER TABLE "DB2ADMIN"."EXAM" ALTER COLUMN "E_ID" RESTART WITH 3;
+
+-- DDL Statements for foreign keys on Table "DB2ADMIN"."FACULTY"
+
+ALTER TABLE "DB2ADMIN"."FACULTY" 
+	ADD CONSTRAINT "CC1362993335282" FOREIGN KEY
+		("ROLE_ID")
+	REFERENCES "DB2ADMIN"."ROLE"
+		("R_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+-- DDL Statements for foreign keys on Table "DB2ADMIN"."QUERY"
+
+ALTER TABLE "DB2ADMIN"."QUERY" 
+	ADD CONSTRAINT "CC1362995095802" FOREIGN KEY
+		("A_TO")
+	REFERENCES "DB2ADMIN"."FACULTY"
+		("F_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+-- DDL Statements for foreign keys on Table "DB2ADMIN"."RESPONSE"
+
+ALTER TABLE "DB2ADMIN"."RESPONSE" 
+	ADD CONSTRAINT "CC1363012024737" FOREIGN KEY
+		("QUERY_ID")
+	REFERENCES "DB2ADMIN"."QUERY"
+		("Q_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+ALTER TABLE "DB2ADMIN"."RESPONSE" 
+	ADD CONSTRAINT "CC1363012035267" FOREIGN KEY
+		("RES_BY")
+	REFERENCES "DB2ADMIN"."FACULTY"
+		("F_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+-- DDL Statements for foreign keys on Table "DB2ADMIN"."FINAL_ANS"
+
+ALTER TABLE "DB2ADMIN"."FINAL_ANS" 
+	ADD CONSTRAINT "CC1363012317959" FOREIGN KEY
+		("TEST_ID")
+	REFERENCES "DB2ADMIN"."FINAL_TEST"
+		("TEST_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+ALTER TABLE "DB2ADMIN"."FINAL_ANS" 
+	ADD CONSTRAINT "CC1364749409312" FOREIGN KEY
+		("ANS_TO")
+	REFERENCES "DB2ADMIN"."FACULTY"
+		("F_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+-- DDL Statements for foreign keys on Table "DB2ADMIN"."BATCH"
+
+ALTER TABLE "DB2ADMIN"."BATCH" 
+	ADD CONSTRAINT "CC1363958979740" FOREIGN KEY
+		("COURSE_ID")
+	REFERENCES "DB2ADMIN"."COURSE"
+		("C_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+ALTER TABLE "DB2ADMIN"."BATCH" 
+	ADD CONSTRAINT "CC1363958992267" FOREIGN KEY
+		("FAC_ID")
+	REFERENCES "DB2ADMIN"."FACULTY"
+		("F_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+-- DDL Statements for foreign keys on Table "DB2ADMIN"."ASSESSMENT"
+
+ALTER TABLE "DB2ADMIN"."ASSESSMENT" 
+	ADD CONSTRAINT "CC1362993982028" FOREIGN KEY
+		("C_ID")
+	REFERENCES "DB2ADMIN"."COURSE"
+		("C_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+ALTER TABLE "DB2ADMIN"."ASSESSMENT" 
+	ADD CONSTRAINT "CC1362994000499" FOREIGN KEY
+		("CREATED_BY")
+	REFERENCES "DB2ADMIN"."FACULTY"
+		("F_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+-- DDL Statements for foreign keys on Table "DB2ADMIN"."TUTORIALS"
+
+ALTER TABLE "DB2ADMIN"."TUTORIALS" 
+	ADD CONSTRAINT "CC1364828594490" FOREIGN KEY
+		("BATCH_ID")
+	REFERENCES "DB2ADMIN"."BATCH"
+		("B_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+ALTER TABLE "DB2ADMIN"."TUTORIALS" 
+	ADD CONSTRAINT "CC1364828605831" FOREIGN KEY
+		("ANS_BY")
+	REFERENCES "DB2ADMIN"."FACULTY"
+		("F_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+-- DDL Statements for foreign keys on Table "DB2ADMIN"."FINAL_TEST"
+
+ALTER TABLE "DB2ADMIN"."FINAL_TEST" 
+	ADD CONSTRAINT "CC1364624777682" FOREIGN KEY
+		("CREATED_BY")
+	REFERENCES "DB2ADMIN"."FACULTY"
+		("F_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+ALTER TABLE "DB2ADMIN"."FINAL_TEST" 
+	ADD CONSTRAINT "CC1365152662305" FOREIGN KEY
+		("BATCH_ID")
+	REFERENCES "DB2ADMIN"."BATCH"
+		("B_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+-- DDL Statements for foreign keys on Table "DB2ADMIN"."EXAM"
+
+ALTER TABLE "DB2ADMIN"."EXAM" 
+	ADD CONSTRAINT "CC1365354720700" FOREIGN KEY
+		("S_ID")
+	REFERENCES "DB2ADMIN"."STUDENT"
+		("S_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+ALTER TABLE "DB2ADMIN"."EXAM" 
+	ADD CONSTRAINT "CC1365354736378" FOREIGN KEY
+		("B_ID")
+	REFERENCES "DB2ADMIN"."BATCH"
+		("B_ID")
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+	ENFORCED
+	ENABLE QUERY OPTIMIZATION;
+
+
+
+
+
+
+
+COMMIT WORK;
+
+CONNECT RESET;
+
+TERMINATE;
+
+-- Generate statistics for all creators 
+-- The db2look utility will consider only the specified tables 
+-- Creating DDL for table(s)
+-- Binding package automatically ... 
+-- Bind is successful
+-- Binding package automatically ... 
+-- Bind is successful
+;

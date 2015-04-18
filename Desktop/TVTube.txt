@@ -1,0 +1,76 @@
+IOBJECTIVE :
+
+The objective of TV Shows project is to provide an efficient and user friendly interface to the channel employees to conduct TV shows in an easy manner.
+
+	The biggest hits of this year are the reality shows in every television channel. They overshadowed the soaps which appeared impossible until last year. It is quite interesting how the backend procedure goes on, how the talented participants are found. The general procedure is to adventure it in the channels or newspapers and call all the participants and test their skills personally. The main disadvantage of this procedure is, it is time consuming, costly as we need to spend money just for informing about the event.
+
+EXISTING SYSTEM :
+
+                          The biggest hits of this year are the reality shows in every television channel. They overshadowed the soaps which appeared impossible until last year. It is quite interesting how the backend procedure goes on, how the talented participants are found. The general procedure is to adventure it in the channels or newspapers and call all the participants and test their skills personally. The main disadvantage of this procedure is, it is time consuming, costly as we need to spend money just for informing about the event.
+
+
+PROPOSED SYSTEM :
+
+In Propose System, we are going to overcome the problems of the existing system. 
+The investment in conducting and marketing the Event in a news channel or television program is a very expensive, but by making the auditions in online, there are several advantages to the artists, users. They are:
+
+•	Artist can upload his works as photos or videos personally.
+•	User can access the System from anywhere of world through internet.
+•	Expense for publicity of events is reduced, as website is the easy and less expensive to canvas the Events.
+•	Fiscal problems are resolved mostly when compared with existing system
+
+
+ADVANTAGES :
+
+The project is identified by the merits of the system offered to the user. The merits of this project are as follows: -
+•	It’s a web-enabled project.
+•	This project offers user to enter the data through simple and interactive forms. This is very helpful for the client to enter the desired information through so much simplicity.
+•	The user is mainly more concerned about the validity of the data, whatever he is entering. There are checks on every stages of any new creation, data entry or updation so that the user cannot enter the invalid data, which can create problems at later date.
+•	Sometimes the user finds in the later stages of using project that he needs to update some of the information that he entered earlier. There are options for him by which he can update the records. Moreover there is restriction for his that he cannot change the primary data field. 
+
+
+SOFTWARE REQUIREMENTS :
+
+
+   Software Requirements are mainly used to develop a code for our project, they are:-
+Operating System Server: Windows XP or later
+Database Server: Microsoft SQL Server-2005
+Client: Microsoft Internet Explorer
+Tools: Microsoft Visual Studio .Net-2008
+User Interface: Asp.Net with Ajax
+Code Behind: C#.Net
+
+
+HARDWARE REQUIREMENTS :
+
+
+              Hard ware requirements are mainly used to develop our project, they are:-
+Processor: Intel Pentium or More
+Ram:	512 MB Ram
+Hard Disk: PC with 20GB
+
+
+
+
+FUNCTIONAL REQUIREMENTS :
+
+
+
+In these functional requirements we have to specify modules of our project, they are
+The modules involved are:	
+1.	Admin.
+2.	TV Guide.
+3.	User.
+
+Admin Module:  In this module admin will maintain all details like categories, adding Tv shows, view the quires, view the post page etc.
+
+TV Guide Module:  In this we are adding the post, discussions view post. And also view discussions and view quires.
+User Module: In this User will registered and view his profile and also view post, queries, discussions.
+
+User Module:    In this User will registered and view his profile and also view post, queries, discussions.
+
+
+
+
+
+

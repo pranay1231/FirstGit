@@ -1,0 +1,23 @@
+
+
+create database tvtube
+
+
+create table video(uname varchar(30),id int identity,video varbinary(MAX),video_name nvarchar(50),video_size bigint,tvguide varchar(20),time datetime)
+
+
+create table quer(id varchar(30),qre varchar(300))
+
+
+create table dissc(id varchar(30),comment varchar(300))
+
+
+create table post(id varchar(30) constraint p4 primary key,img varchar(300),info varchar(1000))
+
+
+create table categre(name varchar(30) constraint p2 primary key,ctgres varchar(30))
+
+
+
+create table reg(fname varchar(30),lname varchar(30),email varchar(35),contno int,uid varchar(30) constraint p1 primary key,pwd varchar(25),dob varchar(40),gender varchar(30),utype varchar(30),ctgres varchar(40),loc varchar(50),addrs varchar(50),status varchar(30));
+
